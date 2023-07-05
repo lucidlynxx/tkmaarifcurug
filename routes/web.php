@@ -53,21 +53,21 @@ Route::controller(ViewController::class)->group(function () {
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/', [DashboardController::class, 'index']);
 
-    Route::resource('/beranda', BerandaController::class)->only('index', 'edit', 'update');
-    Route::resource('/beranda1', TestimoniController::class)->except('destroy', 'index', 'show');
+    Route::resource('/beranda', BerandaController::class)->only(['index', 'edit', 'update']);
+    Route::resource('/beranda1', TestimoniController::class)->except(['destroy', 'index', 'show']);
 
-    Route::resource('/tentang-kami', TentangKamiController::class)->only('index', 'edit', 'update', 'show');
+    Route::resource('/tentang-kami', TentangKamiController::class)->only(['index', 'edit', 'update', 'show']);
 
-    Route::resource('/kelas', SeninController::class)->except('destroy', 'show');
-    Route::resource('/kelas1', SelasaController::class)->except('destroy', 'show', 'index');
-    Route::resource('/kelas2', RabuController::class)->except('destroy', 'show', 'index');
-    Route::resource('/kelas3', KamisController::class)->except('destroy', 'show', 'index');
-    Route::resource('/kelas4', JumatController::class)->except('destroy', 'show', 'index');
-    Route::resource('/kelas5', SabtuController::class)->except('destroy', 'show', 'index');
+    Route::resource('/kelas', SeninController::class)->except(['destroy', 'show']);
+    Route::resource('/kelas1', SelasaController::class)->except(['destroy', 'show', 'index']);
+    Route::resource('/kelas2', RabuController::class)->except(['destroy', 'show', 'index']);
+    Route::resource('/kelas3', KamisController::class)->except(['destroy', 'show', 'index']);
+    Route::resource('/kelas4', JumatController::class)->except(['destroy', 'show', 'index']);
+    Route::resource('/kelas5', SabtuController::class)->except(['destroy', 'show', 'index']);
 
-    Route::resource('/guru', GuruController::class)->except('destroy', 'show');
+    Route::resource('/guru', GuruController::class)->except(['destroy', 'show']);
 
-    Route::resource('/galeri', GaleriController::class)->except('destroy', 'show');
+    Route::resource('/galeri', GaleriController::class)->except(['destroy', 'show']);
 
     Route::resource('/acara', BlogController::class)->except('destroy');
 
