@@ -30,6 +30,14 @@ use App\Http\Controllers\TentangKamiController;
 |
 */
 
+Route::middleware('guest')->group(function () {
+    Route::controller(LoginController::class)->group(function () {
+        Route::get('/login', 'index')->name('login');
+        Route::post('/login', 'authenticate');
+        Route::post('/logout', 'logout');
+    });
+});
+
 Route::controller(ViewController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/tentang-kami', 'about');
@@ -42,39 +50,35 @@ Route::controller(ViewController::class)->group(function () {
     Route::post('/kontak', 'storeContact');
 });
 
-Route::controller(LoginController::class)->group(function () {
-    Route::get('/login', 'index')->name('login')->middleware('guest');
-    Route::post('/login', 'authenticate');
-    Route::post('/logout', 'logout');
-});
+Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
+    Route::get('/', [DashboardController::class, 'index']);
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+    Route::resource('/beranda', BerandaController::class)->only('index', 'edit', 'update');
+    Route::resource('/beranda1', TestimoniController::class)->except('destroy', 'index', 'show');
 
-Route::resource('/dashboard/beranda', BerandaController::class)->only('index', 'edit', 'update')->middleware('auth');
-Route::resource('/dashboard/beranda1', TestimoniController::class)->except('destroy', 'index', 'show')->middleware('auth');
+    Route::resource('/tentang-kami', TentangKamiController::class)->only('index', 'edit', 'update', 'show');
 
-Route::resource('/dashboard/tentang-kami', TentangKamiController::class)->only('index', 'edit', 'update', 'show')->middleware('auth');
+    Route::resource('/kelas', SeninController::class)->except('destroy', 'show');
+    Route::resource('/kelas1', SelasaController::class)->except('destroy', 'show', 'index');
+    Route::resource('/kelas2', RabuController::class)->except('destroy', 'show', 'index');
+    Route::resource('/kelas3', KamisController::class)->except('destroy', 'show', 'index');
+    Route::resource('/kelas4', JumatController::class)->except('destroy', 'show', 'index');
+    Route::resource('/kelas5', SabtuController::class)->except('destroy', 'show', 'index');
 
-Route::resource('/dashboard/kelas', SeninController::class)->except('destroy', 'show')->middleware('auth');
-Route::resource('/dashboard/kelas1', SelasaController::class)->except('destroy', 'show', 'index')->middleware('auth');
-Route::resource('/dashboard/kelas2', RabuController::class)->except('destroy', 'show', 'index')->middleware('auth');
-Route::resource('/dashboard/kelas3', KamisController::class)->except('destroy', 'show', 'index')->middleware('auth');
-Route::resource('/dashboard/kelas4', JumatController::class)->except('destroy', 'show', 'index')->middleware('auth');
-Route::resource('/dashboard/kelas5', SabtuController::class)->except('destroy', 'show', 'index')->middleware('auth');
+    Route::resource('/guru', GuruController::class)->except('destroy', 'show');
 
-Route::resource('/dashboard/guru', GuruController::class)->except('destroy', 'show')->middleware('auth');
+    Route::resource('/galeri', GaleriController::class)->except('destroy', 'show');
 
-Route::resource('/dashboard/galeri', GaleriController::class)->except('destroy', 'show')->middleware('auth');
+    Route::resource('/acara', BlogController::class)->except('destroy');
 
-Route::resource('/dashboard/acara', BlogController::class)->except('destroy')->middleware('auth');
+    Route::controller(KontakController::class)->group(function () {
+        Route::get('/kontak', 'index');
+        Route::get('/kontak/{kontak:slug}', 'show');
+    });
 
-Route::controller(KontakController::class)->group(function () {
-    Route::get('/dashboard/kontak', 'index')->middleware('auth');
-    Route::get('/dashboard/kontak/{kontak:slug}', 'show')->middleware('auth');
-});
-
-Route::controller(AdminController::class)->group(function () {
-    Route::get('/dashboard/admin', 'index')->middleware('auth');
-    Route::get('/dashboard/admin/create', 'create')->middleware('auth');
-    Route::post('/dashboard/admin', 'store')->middleware('auth');
+    Route::controller(AdminController::class)->group(function () {
+        Route::get('/admin', 'index');
+        Route::get('/admin/create', 'create');
+        Route::post('/admin', 'store');
+    });
 });
