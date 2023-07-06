@@ -67,17 +67,6 @@ class GuruController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Guru  $guru
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Guru $guru)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Guru  $guru
@@ -127,16 +116,5 @@ class GuruController extends Controller
         alert()->success('Ubah Data Sukses!', 'Data Guru telah diubah.');
 
         return redirect('/dashboard/guru');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Guru  $guru
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Guru $guru)
-    {
-        //
     }
 }

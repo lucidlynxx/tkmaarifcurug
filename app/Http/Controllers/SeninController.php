@@ -68,17 +68,6 @@ class SeninController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Senin  $senin
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Senin $senin)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Senin  $senin
@@ -118,16 +107,5 @@ class SeninController extends Controller
         alert()->success('Ubah Data Sukses!', 'Data Jadwal telah diubah.');
 
         return redirect('/dashboard/kelas');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Senin  $senin
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Senin $senin)
-    {
-        //
     }
 }

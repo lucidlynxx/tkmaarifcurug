@@ -62,17 +62,6 @@ class GaleriController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Galeri  $galeri
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Galeri $galeri)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Galeri  $galeri
@@ -119,16 +108,5 @@ class GaleriController extends Controller
         alert()->success('Ubah Data Sukses!', 'Data Galeri telah diubah.');
 
         return redirect('/dashboard/galeri');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Galeri  $galeri
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Galeri $galeri)
-    {
-        //
     }
 }

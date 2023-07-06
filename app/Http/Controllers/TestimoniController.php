@@ -10,16 +10,6 @@ use Illuminate\Support\Facades\Storage;
 class TestimoniController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -57,17 +47,6 @@ class TestimoniController extends Controller
         alert()->success('Buat Data Sukses!', 'Data Testimoni telah ditambahkan.');
 
         return redirect('/dashboard/beranda');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Testimoni  $testimoni
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Testimoni $testimoni)
-    {
-        //
     }
 
     /**
@@ -118,16 +97,5 @@ class TestimoniController extends Controller
         alert()->success('Ubah Data Sukses!', 'Data Testimoni telah diubah.');
 
         return redirect('/dashboard/beranda');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Testimoni  $testimoni
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Testimoni $testimoni)
-    {
-        //
     }
 }

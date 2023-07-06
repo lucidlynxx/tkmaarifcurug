@@ -133,15 +133,4 @@ class BlogController extends Controller
 
         return redirect('/dashboard/acara');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Blog  $blog
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Blog $blog)
-    {
-        //
-    }
 }

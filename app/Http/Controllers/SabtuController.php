@@ -9,16 +9,6 @@ use \Cviebrock\EloquentSluggable\Services\SlugService;
 class SabtuController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -51,17 +41,6 @@ class SabtuController extends Controller
         alert()->success('Buat Data Sukses!', 'Data Jadwal telah ditambahkan.');
 
         return redirect('/dashboard/kelas');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Sabtu  $sabtu
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Sabtu $kelas5)
-    {
-        //
     }
 
     /**
@@ -104,16 +83,5 @@ class SabtuController extends Controller
         alert()->success('Ubah Data Sukses!', 'Data Jadwal telah diubah.');
 
         return redirect('/dashboard/kelas');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Sabtu  $sabtu
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Sabtu $sabtu)
-    {
-        //
     }
 }
