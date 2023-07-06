@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Testimoni;
 use Illuminate\Http\Request;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\Storage;
 
 class TestimoniController extends Controller
@@ -30,8 +29,6 @@ class TestimoniController extends Controller
      */
     public function store(Request $request)
     {
-        $request->slug = SlugService::createSlug(Testimoni::class, 'slug', $request->nama);
-
         $validatedData = $request->validate([
             'nama' => 'required|max:255',
             'deskripsi' => 'required',

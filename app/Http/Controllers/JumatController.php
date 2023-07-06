@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Jumat;
 use Illuminate\Http\Request;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class JumatController extends Controller
 {
@@ -29,8 +28,6 @@ class JumatController extends Controller
      */
     public function store(Request $kelas4)
     {
-        $kelas4->slug = SlugService::createSlug(Jumat::class, 'slug', $kelas4->kegiatan);
-
         $validatedData = $kelas4->validate([
             'waktu' => 'required|max:255',
             'kegiatan' => 'required|max:255',

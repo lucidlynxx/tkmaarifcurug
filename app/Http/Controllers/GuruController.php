@@ -6,7 +6,6 @@ use App\Models\Guru;
 use App\Http\Requests\StoreGuruRequest;
 use App\Http\Requests\UpdateGuruRequest;
 use Illuminate\Support\Facades\Storage;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class GuruController extends Controller
 {
@@ -45,8 +44,6 @@ class GuruController extends Controller
      */
     public function store(StoreGuruRequest $request)
     {
-        $request->slug = SlugService::createSlug(Guru::class, 'slug', $request->nama);
-
         $validatedData = $request->validate([
             'nama' => 'required|max:255',
             'alamat' => 'required|max:255',

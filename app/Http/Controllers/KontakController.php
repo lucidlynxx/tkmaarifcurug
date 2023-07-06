@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kontak;
-use Illuminate\Http\Request;
 
 class KontakController extends Controller
 {

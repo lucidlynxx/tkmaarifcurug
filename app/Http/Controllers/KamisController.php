@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Kamis;
 use Illuminate\Http\Request;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class KamisController extends Controller
 {
@@ -29,8 +28,6 @@ class KamisController extends Controller
      */
     public function store(Request $kelas3)
     {
-        $kelas3->slug = SlugService::createSlug(Kamis::class, 'slug', $kelas3->kegiatan);
-
         $validatedData = $kelas3->validate([
             'waktu' => 'required|max:255',
             'kegiatan' => 'required|max:255',

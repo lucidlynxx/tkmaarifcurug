@@ -9,7 +9,6 @@ use App\Models\Sabtu;
 use App\Models\Selasa;
 use App\Models\Senin;
 use Illuminate\Http\Request;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class SeninController extends Controller
 {
@@ -53,8 +52,6 @@ class SeninController extends Controller
      */
     public function store(Request $kela)
     {
-        $kela->slug = SlugService::createSlug(Senin::class, 'slug', $kela->kegiatan);
-
         $validatedData = $kela->validate([
             'waktu' => 'required|max:255',
             'kegiatan' => 'required|max:255',

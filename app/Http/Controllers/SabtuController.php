@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Sabtu;
 use Illuminate\Http\Request;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class SabtuController extends Controller
 {
@@ -29,8 +28,6 @@ class SabtuController extends Controller
      */
     public function store(Request $kelas5)
     {
-        $kelas5->slug = SlugService::createSlug(Sabtu::class, 'slug', $kelas5->kegiatan);
-
         $validatedData = $kelas5->validate([
             'waktu' => 'required|max:255',
             'kegiatan' => 'required|max:255',

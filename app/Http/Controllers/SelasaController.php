@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Selasa;
 use Illuminate\Http\Request;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class SelasaController extends Controller
 {
@@ -29,8 +28,6 @@ class SelasaController extends Controller
      */
     public function store(Request $kelas1)
     {
-        $kelas1->slug = SlugService::createSlug(Selasa::class, 'slug', $kelas1->kegiatan);
-
         $validatedData = $kelas1->validate([
             'waktu' => 'required|max:255',
             'kegiatan' => 'required|max:255',

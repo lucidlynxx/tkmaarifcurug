@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Rabu;
 use Illuminate\Http\Request;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class RabuController extends Controller
 {
@@ -29,8 +28,6 @@ class RabuController extends Controller
      */
     public function store(Request $kelas2)
     {
-        $kelas2->slug = SlugService::createSlug(Rabu::class, 'slug', $kelas2->kegiatan);
-
         $validatedData = $kelas2->validate([
             'waktu' => 'required|max:255',
             'kegiatan' => 'required|max:255',

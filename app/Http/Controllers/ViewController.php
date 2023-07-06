@@ -16,7 +16,6 @@ use App\Models\Senin;
 use App\Models\TentangKami;
 use App\Models\Testimoni;
 use Illuminate\Http\Request;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class ViewController extends Controller
 {
@@ -105,8 +104,6 @@ class ViewController extends Controller
 
     public function storeContact(Request $request)
     {
-        $request->slug = SlugService::createSlug(Kontak::class, 'slug', $request->nama);
-
         $validatedData = $request->validate([
             'nama' => 'required|max:255',
             'email' => 'required|email:dns',

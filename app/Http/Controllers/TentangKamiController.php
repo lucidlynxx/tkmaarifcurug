@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\TentangKami;
-use App\Http\Requests\StoreTentangKamiRequest;
 use App\Http\Requests\UpdateTentangKamiRequest;
 use Illuminate\Support\Facades\Storage;
 

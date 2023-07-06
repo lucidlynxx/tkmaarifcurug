@@ -6,7 +6,6 @@ use App\Models\Blog;
 use App\Http\Requests\StoreBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
 use Illuminate\Support\Str;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
@@ -46,8 +45,6 @@ class BlogController extends Controller
      */
     public function store(StoreBlogRequest $request)
     {
-        $request->slug = SlugService::createSlug(Blog::class, 'slug', $request->judul);
-
         $validatedData = $request->validate([
             'judul' => 'required|max:255',
             'body' => 'required',
