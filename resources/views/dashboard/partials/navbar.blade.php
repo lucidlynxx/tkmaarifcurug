@@ -11,9 +11,10 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-end">
-                    <form action="/logout" method="post">
+                    <form action="/dashboard/logout" method="post">
                         @csrf
-                        <button type="submit" class="dropdown-item"><i class="align-middle me-1" data-feather="log-out"></i> Log out</button>
+                        <button type="submit" class="dropdown-item"><i class="align-middle me-1"
+                                data-feather="log-out"></i> Log out</button>
                     </form>
                 </div>
             </li>

@@ -34,7 +34,6 @@ Route::middleware('guest')->group(function () {
     Route::controller(LoginController::class)->group(function () {
         Route::get('/login', 'index')->name('login');
         Route::post('/login', 'authenticate');
-        Route::post('/logout', 'logout');
     });
 });
 
@@ -81,4 +80,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::get('/admin/create', 'create');
         Route::post('/admin', 'store');
     });
+
+    Route::post('/logout', [LoginController::class, 'logout']);
 });
