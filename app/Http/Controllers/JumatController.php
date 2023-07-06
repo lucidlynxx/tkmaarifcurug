@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreJumatRequest;
+use App\Http\Requests\UpdateJumatRequest;
 use App\Models\Jumat;
-use Illuminate\Http\Request;
 
 class JumatController extends Controller
 {
@@ -26,12 +27,9 @@ class JumatController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $kelas4)
+    public function store(StoreJumatRequest $kelas4)
     {
-        $validatedData = $kelas4->validate([
-            'waktu' => 'required|max:255',
-            'kegiatan' => 'required|max:255',
-        ]);
+        $validatedData = $kelas4->validated();
 
         Jumat::create($validatedData);
 
@@ -62,18 +60,9 @@ class JumatController extends Controller
      * @param  \App\Models\Jumat  $jumat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Jumat $kelas4)
+    public function update(UpdateJumatRequest $request, Jumat $kelas4)
     {
-        $rules = [
-            'waktu' => 'required|max:255',
-            'kegiatan' => 'required|max:255',
-        ];
-
-        if ($request->slug != $kelas4->slug) {
-            $rules['slug'] = 'required|unique:selasas';
-        }
-
-        $validatedData = $request->validate($rules);
+        $validatedData = $request->validated();
 
         Jumat::where('id', $kelas4->id)->update($validatedData);
 

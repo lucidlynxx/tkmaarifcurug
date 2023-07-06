@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTestimoniRequest;
+use App\Http\Requests\UpdateTestimoniRequest;
 use App\Models\Testimoni;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class TestimoniController extends Controller
@@ -27,13 +28,9 @@ class TestimoniController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTestimoniRequest $request)
     {
-        $validatedData = $request->validate([
-            'nama' => 'required|max:255',
-            'deskripsi' => 'required',
-            'image' => 'image|file|max:5120'
-        ]);
+        $validatedData = $request->validated();
 
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('tkmaarifcurug-images');
@@ -68,19 +65,9 @@ class TestimoniController extends Controller
      * @param  \App\Models\Testimoni  $testimoni
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Testimoni $beranda1)
+    public function update(UpdateTestimoniRequest $request, Testimoni $beranda1)
     {
-        $rules = [
-            'nama' => 'required|max:255',
-            'deskripsi' => 'required',
-            'image' => 'image|file|max:5120'
-        ];
-
-        if ($request->slug != $beranda1->slug) {
-            $rules['slug'] = 'required|unique:testimonis';
-        }
-
-        $validatedData = $request->validate($rules);
+        $validatedData = $request->validated();
 
         if ($request->file('image')) {
             if ($request->oldImage) {

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTentangKamiRequest extends FormRequest
+class UpdateSelasaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class StoreTentangKamiRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class StoreTentangKamiRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'waktu' => 'required|max:255',
+            'kegiatan' => 'required|max:255',
         ];
     }
 }

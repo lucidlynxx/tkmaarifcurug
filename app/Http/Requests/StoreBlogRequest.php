@@ -24,7 +24,9 @@ class StoreBlogRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'judul' => 'required|max:255',
+            'body' => 'required',
+            'image' => 'image|file|max:5120',
         ];
     }
 }

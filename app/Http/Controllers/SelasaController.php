@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSelasaRequest;
+use App\Http\Requests\UpdateSelasaRequest;
 use App\Models\Selasa;
-use Illuminate\Http\Request;
 
 class SelasaController extends Controller
 {
@@ -26,12 +27,9 @@ class SelasaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $kelas1)
+    public function store(StoreSelasaRequest $kelas1)
     {
-        $validatedData = $kelas1->validate([
-            'waktu' => 'required|max:255',
-            'kegiatan' => 'required|max:255',
-        ]);
+        $validatedData = $kelas1->validated();
 
         Selasa::create($validatedData);
 
@@ -62,18 +60,9 @@ class SelasaController extends Controller
      * @param  \App\Models\Selasa  $selasa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Selasa $kelas1)
+    public function update(UpdateSelasaRequest $request, Selasa $kelas1)
     {
-        $rules = [
-            'waktu' => 'required|max:255',
-            'kegiatan' => 'required|max:255',
-        ];
-
-        if ($request->slug != $kelas1->slug) {
-            $rules['slug'] = 'required|unique:selasas';
-        }
-
-        $validatedData = $request->validate($rules);
+        $validatedData = $request->validated();
 
         Selasa::where('id', $kelas1->id)->update($validatedData);
 

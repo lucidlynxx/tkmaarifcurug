@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreKamisRequest;
+use App\Http\Requests\UpdateKamisRequest;
 use App\Models\Kamis;
-use Illuminate\Http\Request;
 
 class KamisController extends Controller
 {
@@ -26,12 +27,9 @@ class KamisController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $kelas3)
+    public function store(StoreKamisRequest $kelas3)
     {
-        $validatedData = $kelas3->validate([
-            'waktu' => 'required|max:255',
-            'kegiatan' => 'required|max:255',
-        ]);
+        $validatedData = $kelas3->validated();
 
         Kamis::create($validatedData);
 
@@ -62,18 +60,9 @@ class KamisController extends Controller
      * @param  \App\Models\Kamis  $kamis
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kamis $kelas3)
+    public function update(UpdateKamisRequest $request, Kamis $kelas3)
     {
-        $rules = [
-            'waktu' => 'required|max:255',
-            'kegiatan' => 'required|max:255',
-        ];
-
-        if ($request->slug != $kelas3->slug) {
-            $rules['slug'] = 'required|unique:selasas';
-        }
-
-        $validatedData = $request->validate($rules);
+        $validatedData = $request->validated();
 
         Kamis::where('id', $kelas3->id)->update($validatedData);
 

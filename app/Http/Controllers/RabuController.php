@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRabuRequest;
+use App\Http\Requests\UpdateRabuRequest;
 use App\Models\Rabu;
-use Illuminate\Http\Request;
 
 class RabuController extends Controller
 {
@@ -26,12 +27,9 @@ class RabuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $kelas2)
+    public function store(StoreRabuRequest $kelas2)
     {
-        $validatedData = $kelas2->validate([
-            'waktu' => 'required|max:255',
-            'kegiatan' => 'required|max:255',
-        ]);
+        $validatedData = $kelas2->validated();
 
         Rabu::create($validatedData);
 
@@ -62,18 +60,9 @@ class RabuController extends Controller
      * @param  \App\Models\Rabu  $rabu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rabu $kelas2)
+    public function update(UpdateRabuRequest $request, Rabu $kelas2)
     {
-        $rules = [
-            'waktu' => 'required|max:255',
-            'kegiatan' => 'required|max:255',
-        ];
-
-        if ($request->slug != $kelas2->slug) {
-            $rules['slug'] = 'required|unique:selasas';
-        }
-
-        $validatedData = $request->validate($rules);
+        $validatedData = $request->validated();
 
         Rabu::where('id', $kelas2->id)->update($validatedData);
 

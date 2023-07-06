@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSeninRequest;
+use App\Http\Requests\UpdateSeninRequest;
 use App\Models\Jumat;
 use App\Models\Kamis;
 use App\Models\Rabu;
 use App\Models\Sabtu;
 use App\Models\Selasa;
 use App\Models\Senin;
-use Illuminate\Http\Request;
 
 class SeninController extends Controller
 {
@@ -50,12 +51,9 @@ class SeninController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $kela)
+    public function store(StoreSeninRequest $kela)
     {
-        $validatedData = $kela->validate([
-            'waktu' => 'required|max:255',
-            'kegiatan' => 'required|max:255',
-        ]);
+        $validatedData = $kela->validated();
 
         Senin::create($validatedData);
 
@@ -86,18 +84,9 @@ class SeninController extends Controller
      * @param  \App\Models\Senin  $senin
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Senin $kela)
+    public function update(UpdateSeninRequest $request, Senin $kela)
     {
-        $rules = [
-            'waktu' => 'required|max:255',
-            'kegiatan' => 'required|max:255',
-        ];
-
-        if ($request->slug != $kela->slug) {
-            $rules['slug'] = 'required|unique:senins';
-        }
-
-        $validatedData = $request->validate($rules);
+        $validatedData = $request->validated();
 
         Senin::where('id', $kela->id)->update($validatedData);
 

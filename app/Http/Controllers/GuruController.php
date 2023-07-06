@@ -44,13 +44,7 @@ class GuruController extends Controller
      */
     public function store(StoreGuruRequest $request)
     {
-        $validatedData = $request->validate([
-            'nama' => 'required|max:255',
-            'alamat' => 'required|max:255',
-            'noTelepon' => 'required|numeric|digits:12',
-            'jenisKelamin' => 'required',
-            'image' => 'image|file|max:5120'
-        ]);
+        $validatedData = $request->validated();
 
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('tkmaarifcurug-images');
@@ -87,19 +81,7 @@ class GuruController extends Controller
      */
     public function update(UpdateGuruRequest $request, Guru $guru)
     {
-        $rules = [
-            'nama' => 'required|max:255',
-            'alamat' => 'required|max:255',
-            'noTelepon' => 'required|numeric|digits:12',
-            'jenisKelamin' => 'required',
-            'image' => 'image|file|max:5120'
-        ];
-
-        if ($request->slug != $guru->slug) {
-            $rules['slug'] = 'required|unique:gurus';
-        }
-
-        $validatedData = $request->validate($rules);
+        $validatedData = $request->validated();
 
         if ($request->file('image')) {
             if ($request->oldImage) {

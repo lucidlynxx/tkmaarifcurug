@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAdminRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -25,15 +25,9 @@ class AdminController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreAdminRequest $request)
     {
-        $validatedData = $request->validate([
-            'username' => 'required|min:3|max:255|unique:users',
-            'password' => 'required|min:5|max:255',
-            'alamat' => 'required|max:255',
-            'noTelepon' => 'required|numeric|digits:12',
-            'jenisKelamin' => 'required',
-        ]);
+        $validatedData = $request->validated();
 
         $validatedData['password'] = Hash::make($validatedData['password']);
 

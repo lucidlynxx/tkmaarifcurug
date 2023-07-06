@@ -24,7 +24,11 @@ class StoreGuruRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nama' => 'required|max:255',
+            'alamat' => 'required|max:255',
+            'noTelepon' => 'required|numeric|digits:12',
+            'jenisKelamin' => 'required',
+            'image' => 'image|file|max:5120'
         ];
     }
 }

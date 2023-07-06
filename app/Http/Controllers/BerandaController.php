@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateBerandaRequest;
 use App\Models\Header;
 use App\Models\Testimoni;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class BerandaController extends Controller
@@ -46,15 +46,9 @@ class BerandaController extends Controller
      * @param  \App\Models\Header  $header
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Header $beranda)
+    public function update(UpdateBerandaRequest $request, Header $beranda)
     {
-        $rules = [
-            'namaTk' => 'required|max:255',
-            'deskripsi' => 'required',
-            'image' => 'image|file|max:5120'
-        ];
-
-        $validatedData = $request->validate($rules);
+        $validatedData = $request->validated();
 
         if ($request->file('image')) {
             if ($request->oldImage) {

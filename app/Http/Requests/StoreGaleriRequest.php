@@ -24,7 +24,9 @@ class StoreGaleriRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'kategori' => 'required|max:255',
+            'slug' => 'required|unique:galeris',
+            'image' => 'required|image|file|max:5120',
         ];
     }
 }

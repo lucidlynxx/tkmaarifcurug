@@ -45,11 +45,7 @@ class BlogController extends Controller
      */
     public function store(StoreBlogRequest $request)
     {
-        $validatedData = $request->validate([
-            'judul' => 'required|max:255',
-            'body' => 'required',
-            'image' => 'image|file|max:5120',
-        ]);
+        $validatedData = $request->validated();
 
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('tkmaarifcurug-images');
@@ -103,17 +99,7 @@ class BlogController extends Controller
      */
     public function update(UpdateBlogRequest $request, Blog $acara)
     {
-        $rules = [
-            'judul' => 'required|max:255',
-            'body' => 'required',
-            'image' => 'image|file|max:5120',
-        ];
-
-        if ($request->slug != $acara->slug) {
-            $rules['slug'] = 'required|unique:blogs';
-        }
-
-        $validatedData = $request->validate($rules);
+        $validatedData = $request->validated();
 
         if ($request->file('image')) {
             if ($request->oldImage) {

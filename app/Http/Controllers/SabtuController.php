@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSabtuRequest;
+use App\Http\Requests\UpdateSabtuRequest;
 use App\Models\Sabtu;
-use Illuminate\Http\Request;
 
 class SabtuController extends Controller
 {
@@ -26,12 +27,9 @@ class SabtuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $kelas5)
+    public function store(StoreSabtuRequest $kelas5)
     {
-        $validatedData = $kelas5->validate([
-            'waktu' => 'required|max:255',
-            'kegiatan' => 'required|max:255',
-        ]);
+        $validatedData = $kelas5->validated();
 
         Sabtu::create($validatedData);
 
@@ -62,18 +60,9 @@ class SabtuController extends Controller
      * @param  \App\Models\Sabtu  $sabtu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sabtu $kelas5)
+    public function update(UpdateSabtuRequest $request, Sabtu $kelas5)
     {
-        $rules = [
-            'waktu' => 'required|max:255',
-            'kegiatan' => 'required|max:255',
-        ];
-
-        if ($request->slug != $kelas5->slug) {
-            $rules['slug'] = 'required|unique:selasas';
-        }
-
-        $validatedData = $request->validate($rules);
+        $validatedData = $request->validated();
 
         Sabtu::where('id', $kelas5->id)->update($validatedData);
 

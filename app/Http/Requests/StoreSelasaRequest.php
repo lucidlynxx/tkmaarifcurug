@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateGaleriRequest extends FormRequest
+class StoreSelasaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class UpdateGaleriRequest extends FormRequest
     public function rules()
     {
         return [
-            'kategori' => 'required|max:255',
-            'image' => 'image|file|max:5120',
+            'waktu' => 'required|max:255',
+            'kegiatan' => 'required|max:255',
         ];
     }
 }

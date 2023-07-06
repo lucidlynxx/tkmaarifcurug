@@ -44,11 +44,7 @@ class GaleriController extends Controller
      */
     public function store(StoreGaleriRequest $request)
     {
-        $validatedData = $request->validate([
-            'kategori' => 'required|max:255',
-            'slug' => 'required|unique:galeris',
-            'image' => 'required|image|file|max:5120',
-        ]);
+        $validatedData = $request->validated();
 
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('tkmaarifcurug-images');
@@ -85,16 +81,7 @@ class GaleriController extends Controller
      */
     public function update(UpdateGaleriRequest $request, Galeri $galeri)
     {
-        $rules = [
-            'kategori' => 'required|max:255',
-            'image' => 'image|file|max:5120',
-        ];
-
-        if ($request->slug != $galeri->slug) {
-            $rules['slug'] = 'required|unique:galeris';
-        }
-
-        $validatedData = $request->validate($rules);
+        $validatedData = $request->validated();
 
         if ($request->file('image')) {
             if ($request->oldImage) {
